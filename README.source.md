@@ -327,8 +327,7 @@
 
 ```aura width=860 height=200
 (function() {
- // Injected by GitHub Actions — add "Featured-repo" to any repo's README to feature it here
- var projects = __FEATURED_PROJECTS__;
+ /*FEATURED_START*/var projects = [{"name":"EspeakUp","desc":"Final Year Major Project — online speaking practice platform built with PHP, MySQL & JavaScript.","lang":"PHP","langColor":"#4F5D95","link":"https://github.com/YashChaudhari999/EspeakUp"},{"name":"FileShare","desc":"Real-time multi-user file sharing web app built with Node.js, Express.js, HTML & CSS.","lang":"JavaScript","langColor":"#f1e05a","link":"https://github.com/YashChaudhari999/FileShare"},{"name":"Patient-Details-Management","desc":"Java desktop application for managing patient records with full CRUD functionality.","lang":"Java","langColor":"#b07219","link":"https://github.com/YashChaudhari999/Java-Projects"}];/*FEATURED_END*/
 
  return (
    <div style={{
