@@ -436,12 +436,12 @@
 })()
 ```
 
-```aura width=140 height=44 link="https://www.linkedin.com/in/yashchaudhari500/" inline align=center
+```aura width=168 height=44 link="https://www.linkedin.com/in/yashchaudhari500/" inline align=center
 <SocialMediaButton
   icon="https://raw.githubusercontent.com/collectioneur/collectioneur/main/icons/linkedin-icon.png"
   text="LinkedIn"
   backgroundColor="#000000"
-  width={140}
+  width={144}
   height={44}
   gradientStops={[
     { offset: '0%', color: '#b57af9' },
@@ -453,12 +453,12 @@
 />
 ```
 
-```aura width=130 height=44 link="mailto:yashchaudhari500@gmail.com" inline align=center
+```aura width=158 height=44 link="mailto:yashchaudhari500@gmail.com" inline align=center
 <SocialMediaButton
   icon="https://raw.githubusercontent.com/collectioneur/collectioneur/main/icons/gmail-icon.svg"
   text="Email"
   backgroundColor="#000000"
-  width={130}
+  width={134}
   height={44}
   gradientStops={[
     { offset: '0%', color: '#d855f7' },
@@ -470,12 +470,12 @@
 />
 ```
 
-```aura width=150 height=44 link="https://yashchaudhari.me/" inline align=center
+```aura width=178 height=44 link="https://yashchaudhari.me/" inline align=center
 <SocialMediaButton
   icon="https://raw.githubusercontent.com/YashChaudhari999/YashChaudhari999/main/icons/YC.png"
   text="Portfolio"
   backgroundColor="#000000"
-  width={150}
+  width={154}
   height={44}
   gradientStops={[
     { offset: '0%', color: '#60a5fa' },
