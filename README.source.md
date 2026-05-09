@@ -325,7 +325,7 @@
 })()
 ```
 
-```aura width=860 height=200
+```aura width=860 height=300
 (function() {
  /*FEATURED_START*/var projects = [{"name":"EspeakUp","desc":"Final Year Major Project — online speaking practice platform built with PHP, MySQL & JavaScript.","lang":"PHP","langColor":"#4F5D95","link":"https://github.com/YashChaudhari999/EspeakUp"},{"name":"FileShare","desc":"Real-time multi-user file sharing web app built with Node.js, Express.js, HTML & CSS.","lang":"JavaScript","langColor":"#f1e05a","link":"https://github.com/YashChaudhari999/FileShare"},{"name":"Patient-Details-Management","desc":"Java desktop application for managing patient records with full CRUD functionality.","lang":"Java","langColor":"#b07219","link":"https://github.com/YashChaudhari999/Java-Projects"}];/*FEATURED_END*/
 
@@ -370,7 +370,7 @@
        `}
      </style>
 
-     <svg width="860" height="200" style={{ position: 'absolute', top: 0, left: 0 }}>
+     <svg width="860" height="100%" style={{ position: 'absolute', top: 0, left: 0 }}>
        <defs>
          <radialGradient id="fpg1" cx="50%" cy="50%" r="50%">
            <stop offset="0%"  stopColor="rgba(110,20,210,0.55)" />
@@ -407,11 +407,12 @@
        FEATURED PROJECTS
      </div>
 
-     <div style={{ display:'flex', gap:16, zIndex:10 }}>
+     <div style={{ display:'flex', flexWrap:'wrap', gap:16, zIndex:10 }}>
        {projects.map(function(p) {
          return (
            <div key={p.name} style={{
-             flex:1, display:'flex', flexDirection:'column', gap:6,
+             flexGrow: 1, flexShrink: 1, flexBasis: '45%',
+             display:'flex', flexDirection:'column', gap:6,
              padding:'12px 16px', borderRadius:10,
              background:'rgba(255,255,255,0.03)',
              border:'1px solid rgba(110,80,220,0.15)',

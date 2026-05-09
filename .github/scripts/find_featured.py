@@ -23,6 +23,7 @@ import base64
 import re
 import os
 import sys
+import math
 
 # ── Config ────────────────────────────────────────────────────────
 GITHUB_USER  = "YashChaudhari999"
@@ -190,6 +191,15 @@ def main():
         "/*FEATURED_END*/"
     )
     new_source = MARKER_RE.sub(injection, source)
+
+    # ── Dynamically update SVG height based on number of rows ──
+    # 1 row (1-2 items) = 200, 2 rows (3-4 items) = 300, etc.
+    rows = math.ceil(len(featured) / 2)
+    new_height = 100 + (rows * 100)
+    
+    # Regex targets specifically the aura block containing FEATURED_START
+    height_pattern = r"(```aura\s+width=860\s+height=)\d+(?=\s*\n\(\s*function\s*\(\)\s*\{\s*\n\s*/\*FEATURED_START\*/)"
+    new_source = re.sub(height_pattern, rf"\g<1>{new_height}", new_source, count=1)
 
     with open(SOURCE_FILE, "w", encoding="utf-8") as f:
         f.write(new_source)
