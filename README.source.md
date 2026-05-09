@@ -327,29 +327,42 @@
 
 ```aura width=860 height=200
 (function() {
- var projects = [
-   {
-     name: 'EspeakUp',
-     desc: 'Final Year Major Project — online speaking practice platform built with PHP, MySQL & JavaScript.',
-     lang: 'PHP',
-     langColor: '#4f46e5',
-     link: 'https://github.com/YashChaudhari999/EspeakUp',
-   },
-   {
-     name: 'FileShare',
-     desc: 'Real-time multi-user file sharing web app built with Node.js, Express.js, HTML & CSS.',
-     lang: 'Node.js',
-     langColor: '#10b981',
-     link: 'https://github.com/YashChaudhari999/FileShare',
-   },
-   {
-     name: 'Patient Details Management',
-     desc: 'Java desktop application for managing patient records with full CRUD functionality.',
-     lang: 'Java',
-     langColor: '#f59e0b',
-     link: 'https://github.com/YashChaudhari999/Java-Projects',
-   },
- ];
+ // ── Language → color map (GitHub's official language colors) ──
+ var LANG_COLORS = {
+   'JavaScript': '#f1e05a',
+   'TypeScript': '#3178c6',
+   'Python':     '#3572A5',
+   'Java':       '#b07219',
+   'PHP':        '#4F5D95',
+   'HTML':       '#e34c26',
+   'CSS':        '#563d7c',
+   'C':          '#555555',
+   'C++':        '#f34b7d',
+   'C#':         '#178600',
+   'Go':         '#00ADD8',
+   'Rust':       '#dea584',
+   'Ruby':       '#701516',
+   'Swift':      '#F05138',
+   'Kotlin':     '#A97BFF',
+   'Shell':      '#89e051',
+   'Vue':        '#41b883',
+   'Dart':       '#00B4AB',
+   'Node.js':    '#68a063',
+ };
+
+ // ── Dynamic: top-3 repos by stars (auto-sorted by GitHub API) ──
+ var rawRepos = (github.repos || []).slice(0, 3);
+
+ var projects = rawRepos.map(function(r) {
+   var lang = r.language || 'Code';
+   return {
+     name: r.name,
+     desc: r.description || 'No description provided.',
+     lang: lang,
+     langColor: LANG_COLORS[lang] || '#6e50dc',
+     link: r.url || ('https://github.com/YashChaudhari999/' + r.name),
+   };
+ });
 
  return (
    <div style={{
