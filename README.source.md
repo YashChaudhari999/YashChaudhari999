@@ -327,42 +327,8 @@
 
 ```aura width=860 height=200
 (function() {
- // ── Language → color map (GitHub's official language colors) ──
- var LANG_COLORS = {
-   'JavaScript': '#f1e05a',
-   'TypeScript': '#3178c6',
-   'Python':     '#3572A5',
-   'Java':       '#b07219',
-   'PHP':        '#4F5D95',
-   'HTML':       '#e34c26',
-   'CSS':        '#563d7c',
-   'C':          '#555555',
-   'C++':        '#f34b7d',
-   'C#':         '#178600',
-   'Go':         '#00ADD8',
-   'Rust':       '#dea584',
-   'Ruby':       '#701516',
-   'Swift':      '#F05138',
-   'Kotlin':     '#A97BFF',
-   'Shell':      '#89e051',
-   'Vue':        '#41b883',
-   'Dart':       '#00B4AB',
-   'Node.js':    '#68a063',
- };
-
- // ── Dynamic: top-3 repos by stars (auto-sorted by GitHub API) ──
- var rawRepos = (github.repos || []).slice(0, 3);
-
- var projects = rawRepos.map(function(r) {
-   var lang = r.language || 'Code';
-   return {
-     name: r.name,
-     desc: r.description || 'No description provided.',
-     lang: lang,
-     langColor: LANG_COLORS[lang] || '#6e50dc',
-     link: r.url || ('https://github.com/YashChaudhari999/' + r.name),
-   };
- });
+ // Injected by GitHub Actions — add "Featured-repo" to any repo's README to feature it here
+ var projects = __FEATURED_PROJECTS__;
 
  return (
    <div style={{

@@ -2,13 +2,10 @@ name: Generate README
 
 on:
   push:
-    branches: [main]
-    paths:
-      - 'README.source.md'
-      - '.github/workflows/readme-aura.yml'
+    branches: [main]           # any push triggers a fresh rebuild
   schedule:
-    - cron: '0 6 * * *'
-  workflow_dispatch:
+    - cron: '0 */6 * * *'     # also runs every 6 hours automatically
+  workflow_dispatch:            # manual trigger from Actions tab
 
 permissions:
   contents: write
@@ -20,6 +17,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ── Step 1: Scan repos for "Featured-repo" text ─────────────
+      # The script reads every public repo's README via GitHub API.
+      # If it finds "Featured-repo" anywhere in the file, that repo
+      # is added to the Featured Projects section.
+      # It injects the result into README.source.md as a JSON array,
+      # replacing the __FEATURED_PROJECTS__ placeholder.
+      - name: Find featured repos
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 .github/scripts/find_featured.py
+
+      # ── Step 2: Build README from the modified source ────────────
       - name: Generate README
         uses: collectioneur/readme-aura@main
         with:
@@ -28,5 +37,16 @@ jobs:
           assets_dir: .github/assets
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_user: YashChaudhari999
-          auto_commit: 'true'
-          commit_message: 'generate README via readme-aura'
+          auto_commit: 'false'    # we commit manually below
+
+      # ── Step 3: Restore README.source.md & commit only outputs ──
+      # IMPORTANT: restore README.source.md to its placeholder form
+      # so the next run can inject fresh data again.
+      - name: Commit generated files
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout README.source.md          # ← restore placeholder
+          git add README.md .github/assets/
+          git diff --staged --quiet || git commit -m "auto: rebuild README [skip ci]"
+          git push
