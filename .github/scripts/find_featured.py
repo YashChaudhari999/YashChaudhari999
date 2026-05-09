@@ -31,6 +31,11 @@ SEARCH_TEXT  = "Featured-repo"       # text to scan for in repo READMEs
 MAX_FEATURED = 6                     # max cards shown (layout fits up to 6)
 MAX_DESC_LEN = 120                   # truncate long descriptions
 
+# Repositories you contributed to that you want to check (owner/repo format)
+EXTRA_REPOS = [
+    "kunalkhaire302/carbon-footprint-ai",
+]
+
 # Regex that matches the marker block (single line, compact JSON inside)
 MARKER_RE = re.compile(
     r"/\*FEATURED_START\*/.*?/\*FEATURED_END\*/",
@@ -75,9 +80,9 @@ def api_get(url: str, token: str):
         return json.loads(r.read())
 
 
-def readme_contains(repo_name: str, token: str) -> bool:
-    """Return True if the repo's README contains SEARCH_TEXT."""
-    url = f"https://api.github.com/repos/{GITHUB_USER}/{repo_name}/readme"
+def readme_contains(full_repo_name: str, token: str) -> bool:
+    """Return True if the repo's README contains SEARCH_TEXT. full_repo_name is 'owner/repo'"""
+    url = f"https://api.github.com/repos/{full_repo_name}/readme"
     try:
         data    = api_get(url, token)
         content = base64.b64decode(data["content"]).decode("utf-8", errors="ignore")
@@ -85,12 +90,21 @@ def readme_contains(repo_name: str, token: str) -> bool:
     except urllib.error.HTTPError as e:
         if e.code == 404:
             return False   # no README — skip silently
-        print(f"  ⚠  {repo_name}: HTTP {e.code}", flush=True)
+        print(f"  ⚠  {full_repo_name}: HTTP {e.code}", flush=True)
         return False
     except Exception as exc:
-        print(f"  ⚠  {repo_name}: {exc}", flush=True)
+        print(f"  ⚠  {full_repo_name}: {exc}", flush=True)
         return False
 
+
+def get_repo_details(full_repo_name: str, token: str) -> dict | None:
+    """Fetch details for a specific repository."""
+    url = f"https://api.github.com/repos/{full_repo_name}"
+    try:
+        return api_get(url, token)
+    except Exception as exc:
+        print(f"  ⚠  Failed to fetch details for {full_repo_name}: {exc}", flush=True)
+        return None
 
 def truncate(text: str, length: int) -> str:
     return text if len(text) <= length else text[:length].rstrip() + "…"
@@ -111,10 +125,17 @@ def main():
         print(f"❌  FEATURED_START/FEATURED_END markers not found in {SOURCE_FILE}.", file=sys.stderr)
         sys.exit(1)
 
-    print(f"🔍  Scanning repos of {GITHUB_USER} for '{SEARCH_TEXT}' …", flush=True)
+    print(f"🔍  Scanning repos for '{SEARCH_TEXT}' …", flush=True)
 
-    # Fetch all public repos (paginated, sorted by updated date)
-    all_repos: list[dict] = []
+    all_repos_to_check: list[dict] = []
+
+    # 1. Add extra contributed repos first
+    for extra_repo in EXTRA_REPOS:
+        details = get_repo_details(extra_repo, token)
+        if details:
+            all_repos_to_check.append(details)
+
+    # 2. Fetch all public repos owned by user (paginated)
     page = 1
     while True:
         url   = (
@@ -124,26 +145,28 @@ def main():
         batch = api_get(url, token)
         if not batch:
             break
-        all_repos.extend(batch)
+        all_repos_to_check.extend(batch)
         if len(batch) < 100:
             break
         page += 1
 
-    print(f"   Found {len(all_repos)} public repos. Checking READMEs …", flush=True)
+    print(f"   Found {len(all_repos_to_check)} total repos to check. Checking READMEs …", flush=True)
 
     featured: list[dict] = []
-    for repo in all_repos:
-        name = repo["name"]
-        print(f"   checking {name} …", end=" ", flush=True)
-        if readme_contains(name, token):
+    for repo in all_repos_to_check:
+        full_name = repo["full_name"]  # e.g., 'kunalkhaire302/carbon-footprint-ai' or 'YashChaudhari999/repo'
+        name = repo["name"]            # e.g., 'carbon-footprint-ai'
+        
+        print(f"   checking {full_name} …", end=" ", flush=True)
+        if readme_contains(full_name, token):
             lang = repo.get("language") or "Code"
             desc = truncate(repo.get("description") or "No description provided.", MAX_DESC_LEN)
             featured.append({
-                "name":      name,
+                "name":      name,  # display the short name in the card
                 "desc":      desc,
                 "lang":      lang,
                 "langColor": LANG_COLORS.get(lang, DEFAULT_COLOR),
-                "link":      repo.get("html_url", f"https://github.com/{GITHUB_USER}/{name}"),
+                "link":      repo.get("html_url", f"https://github.com/{full_name}"),
             })
             print("✅  FEATURED", flush=True)
             if len(featured) >= MAX_FEATURED:
