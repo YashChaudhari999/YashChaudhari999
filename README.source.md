@@ -106,13 +106,13 @@
 
  <div style={{ display:'flex', flexDirection:'column', marginLeft:168, gap:8, zIndex: 10 }}>
    <div style={{ display:'flex', fontSize:38, fontWeight:800, color:'#ffffff', letterSpacing:'-1px', lineHeight:1 }}>
-     {github.user.name || github.user.login}
+     Yash Chaudhari
    </div>
    <div style={{ display:'flex', fontSize:15, color:'rgba(180,165,255,0.8)', fontWeight:400, letterSpacing:'0.3px' }}>
-     {github.user.bio || 'Full-Stack Engineer · Competitive Programmer · Open Source'}
+     IT Undergraduate · Full-Stack Developer · Open Source Builder
    </div>
    <div style={{ display:'flex', gap:8, marginTop:6 }}>
-     {['React', 'TypeScript', 'Next.js', 'C++'].map(function(tag) {
+     {['Java', 'Node.js', 'PHP', 'Python', 'MySQL'].map(function(tag) {
        return (
          <div key={tag} style={{
            display:'flex', padding:'4px 12px', borderRadius:20,
@@ -234,12 +234,13 @@
 })()
 ```
 
-```aura width=860 height=168
+```aura width=860 height=220
 (function() {
- var topLangs = github.languages.slice(0, 6).map(function(l) { return l.name; });
  var categories = [
-   { title: 'Languages', color: '#a78bfa', items: topLangs },
-   { title: 'Frameworks', color: '#60a5fa', items: ['React Native', 'React', 'Next.js'] },
+   { title: 'Languages', color: '#a78bfa', items: ['Java', 'JavaScript', 'Python', 'PHP', 'TypeScript', 'HTML/CSS'] },
+   { title: 'Backend',   color: '#60a5fa', items: ['Node.js', 'Express.js', 'Advanced Java'] },
+   { title: 'Frontend',  color: '#34d399', items: ['React', 'HTML5', 'CSS3', 'Bootstrap'] },
+   { title: 'Databases', color: '#f59e0b', items: ['MySQL', 'MongoDB'] },
  ];
 
  return (
@@ -247,7 +248,7 @@
      width: '100%', height: '100%',
      background: '#08080c',
      display: 'flex', flexDirection: 'column',
-     fontFamily: 'Inter', padding: '18px 32px', gap: 14,
+     fontFamily: 'Inter', padding: '18px 32px', gap: 12,
      borderRadius: 16, border: '1px solid rgba(110,80,220,0.18)',
      position: 'relative', overflow: 'hidden',
    }}>
@@ -266,29 +267,13 @@
            0%, 100% { transform: translateX(0px); opacity: 0.9; }
            50% { transform: translateX(200px); opacity: 0.6; }
          }
-         @keyframes float-diagonal {
-           0%, 100% { transform: translate(0px, 0px); opacity: 0.75; }
-           50% { transform: translate(120px, 30px); opacity: 1.0; }
-         }
-         @keyframes float-wave {
-           0%, 100% { transform: translateX(0px); opacity: 0.65; }
-           33% { transform: translateX(-160px); opacity: 0.9; }
-           66% { transform: translateX(80px); opacity: 1.0; }
-         }
-         @keyframes float-pulse {
-           0%, 100% { transform: scale(1); opacity: 0.8; }
-           50% { transform: scale(1.3); opacity: 0.4; }
-         }
          #glow-1 { animation: float-slow 9s ease-in-out infinite; }
          #glow-2 { animation: float-medium 12s ease-in-out infinite; }
          #glow-3 { animation: float-fast 8s ease-in-out infinite; }
-         #glow-4 { animation: float-diagonal 11s ease-in-out infinite reverse; }
-         #glow-5 { animation: float-wave 14s ease-in-out infinite reverse; }
-         #glow-6 { animation: float-pulse 6s ease-in-out infinite; }
        `}
      </style>
 
-     <svg width="860" height="168" style={{ position: 'absolute', top: 0, left: 0 }}>
+     <svg width="860" height="220" style={{ position: 'absolute', top: 0, left: 0 }}>
        <defs>
          <radialGradient id="g1" cx="50%" cy="50%" r="50%">
            <stop offset="0%" stopColor="rgba(115,20,215,0.68)" />
@@ -302,34 +287,18 @@
          </radialGradient>
          <radialGradient id="g3" cx="50%" cy="50%" r="50%">
            <stop offset="0%" stopColor="rgba(0,130,255,0.42)" />
-           <stop offset="50%" stopColor="rgba(0,100,220,0.16)" />
            <stop offset="70%" stopColor="rgba(0,100,220,0)" />
          </radialGradient>
-         <radialGradient id="g4" cx="50%" cy="50%" r="50%">
-           <stop offset="0%" stopColor="rgba(0,185,240,0.32)" />
-           <stop offset="70%" stopColor="rgba(0,185,240,0)" />
-         </radialGradient>
-         <radialGradient id="g5" cx="50%" cy="50%" r="50%">
-           <stop offset="0%" stopColor="rgba(100,25,205,0.42)" />
-           <stop offset="70%" stopColor="rgba(100,25,205,0)" />
-         </radialGradient>
-         <radialGradient id="g6" cx="50%" cy="50%" r="50%">
-           <stop offset="0%" stopColor="rgba(60,80,255,0.35)" />
-           <stop offset="70%" stopColor="rgba(60,80,255,0)" />
-         </radialGradient>
        </defs>
-       <ellipse id="glow-1" cx="170" cy="168" rx="260" ry="170" fill="url(#g1)" />
-       <ellipse id="glow-2" cx="320" cy="178" rx="220" ry="140" fill="url(#g2)" />
-       <ellipse id="glow-3" cx="460" cy="178" rx="190" ry="130" fill="url(#g3)" />
-       <ellipse id="glow-4" cx="590" cy="188" rx="160" ry="110" fill="url(#g4)" />
-       <ellipse id="glow-5" cx="750" cy="188" rx="140" ry="100" fill="url(#g5)" />
-       <ellipse id="glow-6" cx="420" cy="138" rx="100" ry="80" fill="url(#g6)" />
+       <ellipse id="glow-1" cx="170" cy="220" rx="260" ry="170" fill="url(#g1)" />
+       <ellipse id="glow-2" cx="430" cy="220" rx="220" ry="140" fill="url(#g2)" />
+       <ellipse id="glow-3" cx="720" cy="220" rx="190" ry="130" fill="url(#g3)" />
      </svg>
 
      <div style={{ display:'flex', fontSize:10, fontWeight:700, color:'rgba(155,140,210,0.5)', letterSpacing:'3px' }}>
        TECH STACK
      </div>
-     <div style={{ display:'flex', flexDirection:'column', gap:14 }}>
+     <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
        {categories.map(function(cat) {
          return (
            <div key={cat.title} style={{ display:'flex', alignItems:'center', gap:16 }}>
@@ -356,12 +325,96 @@
 })()
 ```
 
-```aura width=120 height=44 link="https://www.linkedin.com/in/ykharchenko/" inline align=center
+```aura width=860 height=200
+(function() {
+ var projects = [
+   {
+     name: 'EspeakUp',
+     desc: 'Final Year Major Project — online speaking practice platform built with PHP, MySQL & JavaScript.',
+     lang: 'PHP',
+     langColor: '#4f46e5',
+     link: 'https://github.com/YashChaudhari999/EspeakUp',
+   },
+   {
+     name: 'FileShare',
+     desc: 'Real-time multi-user file sharing web app built with Node.js, Express.js, HTML & CSS.',
+     lang: 'Node.js',
+     langColor: '#10b981',
+     link: 'https://github.com/YashChaudhari999/FileShare',
+   },
+   {
+     name: 'Patient Details Management',
+     desc: 'Java desktop application for managing patient records with full CRUD functionality.',
+     lang: 'Java',
+     langColor: '#f59e0b',
+     link: 'https://github.com/YashChaudhari999/Java-Projects',
+   },
+ ];
+
+ return (
+   <div style={{
+     width: '100%', height: '100%',
+     background: '#08080c',
+     display: 'flex', flexDirection: 'column',
+     fontFamily: 'Inter', padding: '18px 32px', gap: 10,
+     borderRadius: 16, border: '1px solid rgba(110,80,220,0.18)',
+     position: 'relative', overflow: 'hidden',
+   }}>
+
+     <svg width="860" height="200" style={{ position: 'absolute', top: 0, left: 0 }}>
+       <defs>
+         <radialGradient id="pg1" cx="50%" cy="50%" r="50%">
+           <stop offset="0%" stopColor="rgba(110,20,210,0.5)" />
+           <stop offset="70%" stopColor="rgba(110,20,210,0)" />
+         </radialGradient>
+         <radialGradient id="pg2" cx="50%" cy="50%" r="50%">
+           <stop offset="0%" stopColor="rgba(0,140,255,0.35)" />
+           <stop offset="70%" stopColor="rgba(0,140,255,0)" />
+         </radialGradient>
+       </defs>
+       <ellipse cx="100" cy="200" rx="240" ry="160" fill="url(#pg1)" />
+       <ellipse cx="750" cy="200" rx="200" ry="140" fill="url(#pg2)" />
+     </svg>
+
+     <div style={{ display:'flex', fontSize:10, fontWeight:700, color:'rgba(155,140,210,0.5)', letterSpacing:'3px' }}>
+       FEATURED PROJECTS
+     </div>
+
+     <div style={{ display:'flex', gap:16, zIndex:10 }}>
+       {projects.map(function(p) {
+         return (
+           <div key={p.name} style={{
+             flex:1, display:'flex', flexDirection:'column', gap:6,
+             padding:'12px 16px', borderRadius:10,
+             background:'rgba(255,255,255,0.03)',
+             border:'1px solid rgba(110,80,220,0.15)',
+           }}>
+             <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+               <div style={{ display:'flex', fontSize:13, fontWeight:700, color:'#e0d8ff' }}>{p.name}</div>
+               <div style={{
+                 display:'flex', padding:'2px 9px', borderRadius:20,
+                 background: p.langColor + '22', border:'1px solid ' + p.langColor + '55',
+                 color: p.langColor, fontSize:10, fontWeight:700,
+               }}>{p.lang}</div>
+             </div>
+             <div style={{ display:'flex', fontSize:11, color:'rgba(180,170,220,0.6)', lineHeight:1.5 }}>
+               {p.desc}
+             </div>
+           </div>
+         );
+       })}
+     </div>
+   </div>
+ );
+})()
+```
+
+```aura width=140 height=44 link="https://www.linkedin.com/in/yashchaudhari500/" inline align=center
 <SocialMediaButton
   icon="https://raw.githubusercontent.com/collectioneur/collectioneur/main/icons/linkedin-icon.png"
-  text="Linkedin"
+  text="LinkedIn"
   backgroundColor="#000000"
-  width={120}
+  width={140}
   height={44}
   gradientStops={[
     { offset: '0%', color: '#b57af9' },
@@ -373,46 +426,12 @@
 />
 ```
 
-```aura width=138 height=44 link="https://x.com/collectioneurr" inline align=center
-<SocialMediaButton
-  icon="https://raw.githubusercontent.com/collectioneur/collectioneur/main/icons/x-icon.svg"
-  text="X.com"
-  backgroundColor="#000000"
-  width={138}
-  height={44}
-  gradientStops={[
-    { offset: '0%', color: '#818cf8' },
-    { offset: '30%', color: '#000000' },
-    { offset: '60%', color: '#9298f8' },
-    { offset: '80%', color: '#000000' },
-    { offset: '100%', color: '#7479f5' },
-  ]}
-/>
-```
-
-```aura width=130 height=44 link="https://t.me/yyehorr" inline align=center
-<SocialMediaButton
-  icon="https://raw.githubusercontent.com/collectioneur/collectioneur/main/icons/telegram-icon.svg"
-  text="Telegram"
-  backgroundColor="#000000"
-  width={130}
-  height={44}
-  gradientStops={[
-    { offset: '0%', color: '#5dc8f9' },
-    { offset: '30%', color: '#000000' },
-    { offset: '60%', color: '#7dd3fc' },
-    { offset: '80%', color: '#000000' },
-    { offset: '100%', color: '#4ec3f8' },
-  ]}
-/>
-```
-
-```aura width=110 height=44 link="mailto:yehorkharchenko4@gmail.com" inline align=center
+```aura width=130 height=44 link="mailto:yashchaudhari500@gmail.com" inline align=center
 <SocialMediaButton
   icon="https://raw.githubusercontent.com/collectioneur/collectioneur/main/icons/gmail-icon.svg"
   text="Email"
   backgroundColor="#000000"
-  width={110}
+  width={130}
   height={44}
   gradientStops={[
     { offset: '0%', color: '#d855f7' },
@@ -424,19 +443,19 @@
 />
 ```
 
-```aura width=130 height=44 link="https://www.pinterest.com/collectioneurr" inline align=center
+```aura width=150 height=44 link="https://yashchaudhari.me/" inline align=center
 <SocialMediaButton
-  icon="https://raw.githubusercontent.com/collectioneur/collectioneur/main/icons/pinterest-icon.svg"
-  text="Pinterest"
+  icon="https://raw.githubusercontent.com/collectioneur/collectioneur/main/icons/x-icon.svg"
+  text="Portfolio"
   backgroundColor="#000000"
-  width={130}
+  width={150}
   height={44}
   gradientStops={[
-    { offset: '0%', color: '#f472b6' },
+    { offset: '0%', color: '#60a5fa' },
     { offset: '30%', color: '#000000' },
-    { offset: '60%', color: '#fb7eb8' },
+    { offset: '60%', color: '#3b82f6' },
     { offset: '80%', color: '#000000' },
-    { offset: '100%', color: '#f06aae' },
+    { offset: '100%', color: '#93c5fd' },
   ]}
 />
 ```
