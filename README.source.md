@@ -339,19 +339,68 @@
      position: 'relative', overflow: 'hidden',
    }}>
 
+     <style>
+       {`
+         @keyframes fp-slow {
+           0%, 100% { transform: translateX(0px); opacity: 0.75; }
+           50% { transform: translateX(260px); opacity: 1.1; }
+         }
+         @keyframes fp-medium {
+           0%, 100% { transform: translateX(0px); opacity: 0.65; }
+           50% { transform: translateX(-200px); opacity: 1.0; }
+         }
+         @keyframes fp-fast {
+           0%, 100% { transform: translateX(0px); opacity: 0.85; }
+           50% { transform: translateX(160px); opacity: 0.55; }
+         }
+         @keyframes fp-wave {
+           0%, 100% { transform: translateX(0px); opacity: 0.6; }
+           33% { transform: translateX(-130px); opacity: 0.9; }
+           66% { transform: translateX(90px); opacity: 1.0; }
+         }
+         @keyframes fp-pulse {
+           0%, 100% { transform: scale(1); opacity: 0.7; }
+           50% { transform: scale(1.25); opacity: 0.35; }
+         }
+         #fp-glow-1 { animation: fp-slow   9s  ease-in-out infinite; }
+         #fp-glow-2 { animation: fp-medium 13s ease-in-out infinite; }
+         #fp-glow-3 { animation: fp-fast   8s  ease-in-out infinite; }
+         #fp-glow-4 { animation: fp-wave   11s ease-in-out infinite; }
+         #fp-glow-5 { animation: fp-pulse  7s  ease-in-out infinite; }
+       `}
+     </style>
+
      <svg width="860" height="200" style={{ position: 'absolute', top: 0, left: 0 }}>
        <defs>
-         <radialGradient id="pg1" cx="50%" cy="50%" r="50%">
-           <stop offset="0%" stopColor="rgba(110,20,210,0.5)" />
-           <stop offset="70%" stopColor="rgba(110,20,210,0)" />
+         <radialGradient id="fpg1" cx="50%" cy="50%" r="50%">
+           <stop offset="0%"  stopColor="rgba(110,20,210,0.55)" />
+           <stop offset="45%" stopColor="rgba(90,15,180,0.22)"  />
+           <stop offset="70%" stopColor="rgba(90,15,180,0)"     />
          </radialGradient>
-         <radialGradient id="pg2" cx="50%" cy="50%" r="50%">
-           <stop offset="0%" stopColor="rgba(0,140,255,0.35)" />
-           <stop offset="70%" stopColor="rgba(0,140,255,0)" />
+         <radialGradient id="fpg2" cx="50%" cy="50%" r="50%">
+           <stop offset="0%"  stopColor="rgba(40,60,255,0.50)"  />
+           <stop offset="45%" stopColor="rgba(30,50,200,0.20)"  />
+           <stop offset="70%" stopColor="rgba(30,50,200,0)"     />
+         </radialGradient>
+         <radialGradient id="fpg3" cx="50%" cy="50%" r="50%">
+           <stop offset="0%"  stopColor="rgba(0,130,255,0.40)"  />
+           <stop offset="70%" stopColor="rgba(0,100,220,0)"     />
+         </radialGradient>
+         <radialGradient id="fpg4" cx="50%" cy="50%" r="50%">
+           <stop offset="0%"  stopColor="rgba(0,190,230,0.28)"  />
+           <stop offset="70%" stopColor="rgba(0,190,230,0)"     />
+         </radialGradient>
+         <radialGradient id="fpg5" cx="50%" cy="50%" r="50%">
+           <stop offset="0%"  stopColor="rgba(160,30,255,0.45)" />
+           <stop offset="45%" stopColor="rgba(130,20,220,0.18)" />
+           <stop offset="70%" stopColor="rgba(130,20,220,0)"    />
          </radialGradient>
        </defs>
-       <ellipse cx="100" cy="200" rx="240" ry="160" fill="url(#pg1)" />
-       <ellipse cx="750" cy="200" rx="200" ry="140" fill="url(#pg2)" />
+       <ellipse id="fp-glow-1" cx="120"  cy="200" rx="250" ry="170" fill="url(#fpg1)" />
+       <ellipse id="fp-glow-2" cx="320"  cy="210" rx="210" ry="150" fill="url(#fpg2)" />
+       <ellipse id="fp-glow-3" cx="520"  cy="200" rx="180" ry="140" fill="url(#fpg3)" />
+       <ellipse id="fp-glow-4" cx="700"  cy="210" rx="160" ry="130" fill="url(#fpg4)" />
+       <ellipse id="fp-glow-5" cx="820"  cy="200" rx="140" ry="120" fill="url(#fpg5)" />
      </svg>
 
      <div style={{ display:'flex', fontSize:10, fontWeight:700, color:'rgba(155,140,210,0.5)', letterSpacing:'3px' }}>
